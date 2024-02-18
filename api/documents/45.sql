@@ -1,0 +1,1 @@
+SELECT * FROM videos, users INNER JOIN videos.user_id = users.user_id WHERE videos.title OR videos.
