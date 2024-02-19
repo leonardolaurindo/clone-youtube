@@ -3,7 +3,7 @@ node_modules
 api/other/test.js
 api/other/test.ts
 
-test/
+api/test/
 api/node_modules
 
 .env
