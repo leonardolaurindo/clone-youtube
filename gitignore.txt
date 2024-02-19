@@ -1,3 +1,5 @@
-/api/node_modules
-/test
-text.txt
+other.te
+other/test.js
+
+test
+api/node_modules
