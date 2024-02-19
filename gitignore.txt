@@ -1,7 +1,0 @@
-other.te
-other/test.js
-
-test
-api/node_modules
-
-.env
