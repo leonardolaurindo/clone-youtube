@@ -1,8 +1,9 @@
 node_modules
 
-other/test.js
+api/other/test.js
+api/other/test.ts
 
-test
+test/
 api/node_modules
 
 .env
