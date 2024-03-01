@@ -1,7 +1,7 @@
 import { pool } from '../../../mysql';
 import { v4 as uuidv4 } from 'uuid';
 import { hash, compare } from 'bcrypt';
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { Request, Response } from 'express';
 
 class UserRepository {
@@ -75,6 +75,37 @@ class UserRepository {
                 }
             )
         })
+    }
+
+    getUser(request: any, response: any) {
+        //recebe token do usuaio decodifica
+        const decode: any = verify(request.headers.authorization, process.env.SECRET as string);
+        // pega o email
+        if (decode.email) {
+            pool.getConnection((error, conn) => {
+                conn.query(
+                    'SELECT * FROM users WHERE email=?',
+                    [decode.email],
+                    (error, resultado, fields) => {
+                        conn.release();
+                        if (error) {
+                            return response.status(400).send({
+                                error: error,
+                                response: null
+                            })
+                        }
+                        // console.log(resultado);
+                        return response.status(201).send({
+                            user: {
+                                nome: resultado[0].name,
+                                email: resultado[0].email,
+                                id: resultado[0].user_id,
+                            }
+                        })
+                    }
+                )
+            })
+        }
     }
 }
 
